@@ -2,21 +2,30 @@ name: lint
 
 on: [push, pull_request]
 
+env:
+  PIPX_VERSION: "1.1.0"
+  POETRY_VERSION: "1.2.0"
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7"]
+        python-version: 
+         - "3.8"
+         - "3.9"
+         - "3.10"
     steps:
     - uses: actions/checkout@v3
-    - name: Install poetry
-      run: pipx install poetry==1.2.0
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
         cache: 'poetry'
+    - name: Install poetry
+      run: |
+        pip install pipx==$PIPX_VERSION
+        pipx install poetry==$POETRY_VERSION
     - name: Install dependencies
       run: poetry install
     - name: Analysing the code with our lint
