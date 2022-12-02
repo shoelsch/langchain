@@ -1,9 +1,11 @@
 name: lint
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
 
 env:
-  PIPX_VERSION: "1.1.0"
   POETRY_VERSION: "1.2.0"
 
 jobs:
@@ -27,9 +29,6 @@ jobs:
         cache: poetry
     - name: Install dependencies
       run: |
-        ls
-        which python3
-        which poetry
         poetry install
     - name: Analysing the code with our lint
       run: |
