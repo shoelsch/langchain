@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "langchain"
-version = "0.0.26"
+version = "0.0.0"
 description = "Building applications with LLMs through composability"
 authors = []
 license = "MIT"
@@ -56,6 +56,10 @@ ignore_missing_imports = "True"
 disallow_untyped_defs = "True"
 exclude = ["notebooks"]
 
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
